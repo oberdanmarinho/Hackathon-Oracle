@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import '../css/crestaurant.css';
 import '../css/index.css';
 import React,{Component} from 'react';
+import axios from 'axios';
 
 export default class Restaurant extends Component {
     
@@ -33,7 +34,12 @@ export default class Restaurant extends Component {
         }
 
         submitForm(){
-                alert(JSON.stringify(this.state));
+                 axios.create({
+                    url:"https://lab-axcemqltmwdh-px.integration.us-phoenix-1.ocp.oraclecloud.com/ic/api/integration/v1/flows/rest/RESTAURANTE_API/1.0/crestaurante",
+                    headers: {
+                        "Content-type": "application/json"
+                      }
+                });
         }
 
     render(){
