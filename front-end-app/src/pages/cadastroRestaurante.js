@@ -7,9 +7,6 @@ import Col from "react-bootstrap/Col";
 import "../css/crestaurant.css";
 import "../css/index.css";
 import React, { Component } from "react";
-
-// import httpService from "./httpService.js";
-
 import axios from 'axios';
 
 const api = axios.create({
@@ -47,29 +44,6 @@ export default class Restaurant extends Component {
       console.log(res.data)
     })
   }
-
-  // submitForm(e){
-  //   e.preventDefault();
-    
-  //   httpService.create(this.state).then(response => {
-  //     console.log(response.data)
-  //   }) 
-  // }
-
-
-  // submitForm() {
-  //   httpService
-  //     .create(this.state)
-  //     .then((response) => {
-  //       debugger;
-  //       console.log(response.data);
-  //     })
-  //     .catch((e) => {
-  //       debugger;
-  //       console.log(e);
-  //       console.log(e.config);
-  //     });
-  // }
 
   render() {
     return (
