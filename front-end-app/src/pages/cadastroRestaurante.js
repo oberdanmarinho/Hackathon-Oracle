@@ -7,12 +7,22 @@ import Col from "react-bootstrap/Col";
 import "../css/crestaurant.css";
 import "../css/index.css";
 import React, { Component } from "react";
-import axios from 'axios';
+import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://lab-axcemqltmwdh-px.integration.us-phoenix-1.ocp.oraclecloud.com/ic/api/integration/v1/flows/rest/RESTAURANTE_API/1.0/"
-})
+  baseURL:
+    "https://lab-axcemqltmwdh-px.integration.us-phoenix-1.ocp.oraclecloud.com/ic/api/integration/v1/flows/rest/RESTAURANTE_API/1.0",
+});
 
+const token =
+  "aGFja2FjbG91ZHNpbnFpYXRpbWUwM0BnbWFpbC5jb206SGFja2FjbG91ZHNpbnFpYTAzKg==";
+
+const options = {
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Authorization": `Basic ${token}`,
+  },
+};
 
 export default class Restaurant extends Component {
   constructor(props) {
@@ -37,12 +47,35 @@ export default class Restaurant extends Component {
     });
   }
 
-  submitForm(e){
+  submitForm(e) {
     e.preventDefault();
 
-    api.post('crestaurante/', this.state).then(res => {
-      console.log(res.data)
-    })
+    let data = {
+      nome: this.state.nome,
+      password: Buffer.from(this.state.password).toString("base64"),
+      especialidade: this.state.especialidade,
+      endereco: this.state.endereco,
+      cidade: this.state.cidade,
+      cep: this.state.cep,
+      cnpj: this.state.cnpj,
+    };
+
+    api.post("/crestaurante", data, options).then((res) => {
+      if (res.status === 200) {
+        alert(res.data.resultado);
+        console.log(res);
+
+        this.setState({
+          nome: "",
+          password: "",
+          especialidade: "",
+          endereco: "",
+          cidade: "",
+          cep: "",
+          cnpj: "",
+        });
+      }
+    });
   }
 
   render() {
