@@ -1,13 +1,13 @@
 
-import httpCommon from './http-common.js';
+// import httpCommon from './http-common.js';
 
-const create = data => {
-  return httpCommon.post("/crestaurante",data)
-}
+// const create = data => {
+//   return httpCommon.post("/restaurantes",data)
+// }
 
 
-const httpService = {
-  create
-};
+// const httpService = {
+//   create
+// };
 
-export default httpService;
+// export default httpService;

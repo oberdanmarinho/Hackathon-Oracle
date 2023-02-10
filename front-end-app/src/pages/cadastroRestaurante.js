@@ -7,7 +7,15 @@ import Col from "react-bootstrap/Col";
 import "../css/crestaurant.css";
 import "../css/index.css";
 import React, { Component } from "react";
-import httpService from "./httpService.js";
+
+// import httpService from "./httpService.js";
+
+import axios from 'axios';
+
+const api = axios.create({
+  baseURL: "https://lab-axcemqltmwdh-px.integration.us-phoenix-1.ocp.oraclecloud.com/ic/api/integration/v1/flows/rest/RESTAURANTE_API/1.0/"
+})
+
 
 export default class Restaurant extends Component {
   constructor(props) {
@@ -32,19 +40,36 @@ export default class Restaurant extends Component {
     });
   }
 
-  submitForm() {
-    httpService
-      .create(this.state)
-      .then((response) => {
-        debugger;
-        console.log(response.data);
-      })
-      .catch((e) => {
-        debugger;
-        console.log(e);
-        console.log(e.config);
-      });
+  submitForm(e){
+    e.preventDefault();
+
+    api.post('crestaurante/', this.state).then(res => {
+      console.log(res.data)
+    })
   }
+
+  // submitForm(e){
+  //   e.preventDefault();
+    
+  //   httpService.create(this.state).then(response => {
+  //     console.log(response.data)
+  //   }) 
+  // }
+
+
+  // submitForm() {
+  //   httpService
+  //     .create(this.state)
+  //     .then((response) => {
+  //       debugger;
+  //       console.log(response.data);
+  //     })
+  //     .catch((e) => {
+  //       debugger;
+  //       console.log(e);
+  //       console.log(e.config);
+  //     });
+  // }
 
   render() {
     return (
